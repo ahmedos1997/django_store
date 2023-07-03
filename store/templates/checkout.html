@@ -2,8 +2,6 @@
 {% load i18n myfilters%}
 {% block content %}
     {% include 'common/page_title.html' with title='Checkout' %}
-  <main>
-     </div>
       <div class="container my-5">
         <div class="row bd-highlight">
           <div class="col-md-12">
@@ -18,7 +16,7 @@
             <h4 class="my-3">{% trans 'your information' %}</h4>
             <div class="card">
               <div class="card-body">
-                <form id="form-user-info" action="{% url 'checkout.order' %}" method="post">
+                <form id="form-user-info" >
                     {% csrf_token %}
                   <div class="row">
                     <div class="col-md-6">
@@ -62,50 +60,49 @@
                       required
                     />
                   </div>
-                  <button class="btn btn-primary">
-                    {% trans 'Save' %}
-                  </button>
+
                 </form>
               </div>
             </div>
             <h4 class="my-3">{% trans 'Payment method' %}</h4>
             <div class="row">
               <div class="col-md-6">
-                <div id="pm-paypal" class="card" role="button">
+                <div id="card" class="card" role="button" onclick="createPaypalSession()">
                   <div class="card-body text-center">
                     <p>{% trans 'paypal' %}</p>
                     <i class="lni lni-paypal-original fs-1"></i>
                   </div>
                 </div>
               </div>
-              <div id="pm-stripe" class="col-md-6">
-                <div class="card" role="button">
-                  <div class="card-body text-center">
-                    <p>{% trans 'credit card' %}</p>
-                    <i class="lni lni-credit-cards fs-1"></i>
+                <div id="pm-stripe" class="col-md-6">
+                  <div class="card" role="button" onclick="createStripeSession()">
+                    <div class="card-body text-center">
+                      <p>{% trans 'credit card' %}</p>
+                      <i class="lni lni-credit-cards fs-1"></i>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div id="payment-cont" class="card mt-3 d-none">
-              <div class="card-body text-center">
-                <div id="paypal-cont"></div>
-                <div id="stripe-cont">
-                  <form id="payment-form">
-                    <div id="payment-element"></div>
-                    <div class="d-grid gap-2 my-3">
-                      <button class="btn btn-primary" type="submit">
-                        إتمام عملية الشراء
-                      </button>
+              <div class="col-md-12">
+                  <div id="payment-form-container">
+                    <div id="stripe-card" class="card my-3 p-3" style="display: none">
+                      <form id="payment-form">
+                        <div id="payment-element">
+                        </div>
+                        <button id="stripe-submit" class="btn btn-primary mt-3">
+                          {% trans 'pay now' %}
+                        </button>
+
+                      </form>
                     </div>
-                    <div id="payment-message" class="hidden"></div>
-                  </form>
+                  </div>
+                  <div id="paypal-card" class="card my-3 p-3" style="display: none">
+                  </div>
+                  </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </main>
-
 {% endblock %}
