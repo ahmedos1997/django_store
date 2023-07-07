@@ -86,6 +86,7 @@ def make_transaction(request, pm):
             items=cart.items,
             amount=math.ceil(total))
 
+
 def send_order_email(order, products):
     msg_html = render_to_string('emails/order.html', {
         'order': order,

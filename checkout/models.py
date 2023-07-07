@@ -30,3 +30,11 @@ class Transaction(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    @property
+    def customer_name(self):
+        return self.customer['first_name'] + ' ' + self.customer['last_name']
+
+    @property
+    def customer_email(self):
+        return self.customer['email']
